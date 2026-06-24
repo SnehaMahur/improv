@@ -54,12 +54,15 @@ export default function StartStory() {
         >
           YAY! The story is active. Let's wait and see how it goes.
         </p>
-        <div style={{ animation: 'story-active-line-in 0.5s ease-out 2.1s forwards', opacity: 0 }}>
-          <Link to="/archive" className="btn-secondary">
-            Go to Archive
+        <div
+          className="flex gap-3 w-full max-w-xs"
+          style={{ animation: 'story-active-line-in 0.5s ease-out 2.1s forwards', opacity: 0 }}
+        >
+          <Link to={`/story/${storyId}`} className="btn-primary flex-1 text-[11px] tracking-wide uppercase py-4">
+            View Progress
           </Link>
-          <Link to={`/story/${storyId}`} className="block font-mono font-light text-xs text-black/50 underline mt-6">
-            Or view your story
+          <Link to="/archive" className="btn-secondary flex-1 text-[11px] tracking-wide uppercase py-4">
+            Go to Archive
           </Link>
         </div>
       </main>

@@ -43,7 +43,7 @@ export default function Home() {
       </div>
 
       {/* Plain text link below CTAs */}
-      <p className="font-mono font-light text-xs text-black mb-6">
+      <p className="font-mono font-light text-xs text-black mb-2">
         Or go to <Link to="/archive" className="underline">archive</Link>.
       </p>
 
