@@ -1,0 +1,56 @@
+import { Link } from 'react-router-dom'
+import HeroAnimation from '../components/animations/HeroAnimation'
+
+export default function Home() {
+  return (
+    <main
+      className="min-h-screen flex flex-col items-center justify-between px-6 pb-6 text-center"
+      style={{ paddingTop: 'calc(env(safe-area-inset-top) + 1.5rem)' }}
+    >
+
+      {/* Top: title + subtitle */}
+      <div className="w-full max-w-sm">
+        <h1 className="font-serif font-medium text-3xl mb-2 tracking-tight text-black">Improv</h1>
+        <p className="font-mono font-light text-sm text-black tracking-wide">
+          Stories written by strangers
+        </p>
+      </div>
+
+      {/* Middle: animation */}
+      <div className="w-full max-w-sm my-4">
+        <HeroAnimation />
+      </div>
+
+      {/* Tagline */}
+      <div className="max-w-xs mb-4">
+        <p className="font-mono font-light text-sm leading-relaxed mb-2 text-black">
+          Write a line. Pass it on.<br />
+          See what the world creates together.
+        </p>
+        <p className="font-mono font-light text-xs text-black/60">
+          No AI, just imagination.
+        </p>
+      </div>
+
+      {/* CTAs */}
+      <div className="flex gap-3 w-full max-w-xs mb-2">
+        <Link to="/start" className="btn-primary flex-1 text-[11px] tracking-wide uppercase py-4 whitespace-nowrap">
+          Start a Story
+        </Link>
+        <Link to="/continue" className="btn-secondary flex-1 text-[11px] tracking-wide uppercase py-4 whitespace-nowrap">
+          Continue One
+        </Link>
+      </div>
+
+      {/* Plain text link below CTAs */}
+      <p className="font-mono font-light text-xs text-black mb-6">
+        Or go to <Link to="/archive" className="underline">archive</Link>.
+      </p>
+
+      {/* Footer credit */}
+      <p className="font-mono font-light text-xs text-black">
+        Designed &amp; built by Sneha Mahur with Claude
+      </p>
+    </main>
+  )
+}
