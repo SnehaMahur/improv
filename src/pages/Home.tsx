@@ -4,7 +4,7 @@ import HeroAnimation from '../components/animations/HeroAnimation'
 export default function Home() {
   return (
     <main
-      className="min-h-screen flex flex-col items-center justify-between px-6 pb-6 text-center"
+      className="min-h-[100dvh] flex flex-col items-center justify-between px-6 pb-6 text-center"
       style={{ paddingTop: 'calc(env(safe-area-inset-top) + 1.5rem)' }}
     >
 
@@ -33,7 +33,7 @@ export default function Home() {
       </div>
 
       {/* CTAs */}
-      <div className="flex gap-3 w-full max-w-xs mb-2">
+      <div className="flex gap-3 w-full max-w-xs mb-1">
         <Link to="/start" className="btn-primary flex-1 text-[11px] tracking-wide uppercase py-4 whitespace-nowrap">
           Start a Story
         </Link>
@@ -43,7 +43,7 @@ export default function Home() {
       </div>
 
       {/* Plain text link below CTAs */}
-      <p className="font-mono font-light text-xs text-black mb-2">
+      <p className="font-mono font-light text-xs text-black mb-1">
         Or go to <Link to="/archive" className="underline">archive</Link>.
       </p>
 
