@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import StoryCard from '../components/ui/StoryCard'
 import BackLink from '../components/ui/BackLink'
 import CatMascot, { CAT_VIEWBOX } from '../components/ui/cat/CatMascot'
@@ -11,7 +12,8 @@ type Tab = 'finished' | 'active'
 const SIT_GROUND_FRACTION = 428 / 512
 
 export default function Archive() {
-  const [tab, setTab] = useState<Tab>('finished')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const tab: Tab = searchParams.get('tab') === 'active' ? 'active' : 'finished'
   const [finished, setFinished] = useState<Story[]>([])
   const [active, setActive] = useState<Story[]>([])
   const [loading, setLoading] = useState(true)
@@ -67,7 +69,7 @@ export default function Archive() {
         {/* Tabs */}
         <div className="flex border-[0.5px] border-black/40 bg-white mb-12 w-fit">
           <button
-            onClick={() => setTab('finished')}
+            onClick={() => setSearchParams({})}
             className={`px-5 py-2.5 text-sm font-mono uppercase tracking-wide transition-colors duration-150 ${
               tab === 'finished' ? 'bg-black text-white' : 'hover:bg-black/5'
             }`}
@@ -75,7 +77,7 @@ export default function Archive() {
             Finished ({finished.length})
           </button>
           <button
-            onClick={() => setTab('active')}
+            onClick={() => setSearchParams({ tab: 'active' })}
             className={`px-5 py-2.5 text-sm font-mono uppercase tracking-wide border-l-[0.5px] border-black/40 transition-colors duration-150 ${
               tab === 'active' ? 'bg-black text-white' : 'hover:bg-black/5'
             }`}
