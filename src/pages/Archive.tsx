@@ -69,7 +69,7 @@ export default function Archive() {
         {/* Tabs */}
         <div className="flex border-[0.5px] border-black/40 mb-12 w-fit">
           <button
-            onClick={() => setSearchParams({})}
+            onClick={() => setSearchParams({}, { replace: true })}
             className={`px-5 py-2.5 text-sm font-mono uppercase tracking-wide transition-colors duration-150 ${
               tab === 'finished' ? 'bg-black text-white' : 'bg-transparent hover:bg-black/5'
             }`}
@@ -77,7 +77,7 @@ export default function Archive() {
             Finished ({finished.length})
           </button>
           <button
-            onClick={() => setSearchParams({ tab: 'active' })}
+            onClick={() => setSearchParams({ tab: 'active' }, { replace: true })}
             className={`px-5 py-2.5 text-sm font-mono uppercase tracking-wide border-l-[0.5px] border-black/40 transition-colors duration-150 ${
               tab === 'active' ? 'bg-black text-white' : 'bg-transparent hover:bg-black/5'
             }`}
