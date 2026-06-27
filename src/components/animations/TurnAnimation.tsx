@@ -43,14 +43,14 @@ export default function TurnAnimation({ message, storyId, storyTitle }: Props) {
         {message}
       </p>
 
-      <div className="flex gap-3 w-full max-w-xs" style={{ animation: 'turn-line-in 0.5s ease-out 2.4s forwards', opacity: 0 }}>
-        <Link to={`/story/${storyId}`} className="btn-primary flex-1 text-[11px] tracking-wide uppercase py-4">
+      <div className="flex gap-2 w-full max-w-xs" style={{ animation: 'turn-line-in 0.5s ease-out 2.4s forwards', opacity: 0 }}>
+        <Link to={`/story/${storyId}`} className="btn-primary flex-1 !px-2 text-[10px] tracking-normal uppercase py-3 whitespace-nowrap">
           View Progress
         </Link>
         <InviteFriendsButton
           storyId={storyId}
           storyTitle={storyTitle}
-          className="btn-secondary flex-1 text-[11px] tracking-wide uppercase py-4"
+          className="btn-secondary flex-1 !px-2 text-[10px] tracking-normal uppercase py-3 whitespace-nowrap"
         />
       </div>
     </main>

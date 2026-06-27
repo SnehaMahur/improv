@@ -33,11 +33,11 @@ export default function Home() {
       </div>
 
       {/* CTAs */}
-      <div className="flex gap-3 w-full max-w-xs mb-1">
-        <Link to="/start" className="btn-primary flex-1 text-[11px] tracking-wide uppercase py-4 whitespace-nowrap">
+      <div className="flex gap-2 w-full max-w-xs mb-1">
+        <Link to="/start" className="btn-primary flex-1 !px-2 text-[10px] tracking-normal uppercase py-3 whitespace-nowrap">
           Start a Story
         </Link>
-        <Link to="/continue" className="btn-secondary flex-1 text-[11px] tracking-wide uppercase py-4 whitespace-nowrap">
+        <Link to="/continue" className="btn-secondary flex-1 !px-2 text-[10px] tracking-normal uppercase py-3 whitespace-nowrap">
           Continue One
         </Link>
       </div>
