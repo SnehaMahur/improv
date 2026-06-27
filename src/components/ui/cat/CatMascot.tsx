@@ -144,9 +144,6 @@ function PeekingGroup({ blink, tailTwitch }: { blink?: boolean; tailTwitch?: boo
   return (
     <>
       <g stroke="black" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round">
-        {/* ledge */}
-        <path d="M270 690 H1330" />
-
         {/* tail */}
         <path
           className={tailTwitch ? 'cat-anim-tail' : ''}
