@@ -54,7 +54,7 @@ export default function Archive() {
   }, [tab, loading, stories.length])
 
   return (
-    <main className="max-w-5xl mx-auto px-6 py-16">
+    <main className="max-w-5xl mx-auto px-6 pt-6 pb-16">
       <BackLink className="mb-6" />
       <p className="label-sm mb-3">Archive</p>
       <h1 className="font-serif font-medium text-2xl mb-10">Story Archive</h1>

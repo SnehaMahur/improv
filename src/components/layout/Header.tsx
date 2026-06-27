@@ -10,7 +10,7 @@ export default function Header() {
       style={{ backgroundColor: '#f5ede8', paddingTop: 'env(safe-area-inset-top)' }}
     >
       <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-        <Link to="/" className="font-serif font-medium text-xl tracking-tight">
+        <Link to="/" className="font-aileron font-semibold uppercase text-xl tracking-tight">
           Improv
         </Link>
         <Link

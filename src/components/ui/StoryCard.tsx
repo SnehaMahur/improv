@@ -25,7 +25,14 @@ export default function StoryCard({ story, linkTo }: Props) {
         #{story.number}
       </span>
 
-      <h3 className="font-serif font-medium text-lg leading-snug mb-2">{story.title}</h3>
+      <div className="flex items-baseline justify-between gap-3 mb-2">
+        <h3 className="font-serif font-medium text-lg leading-snug">{story.title}</h3>
+        {isFinished && (
+          <span className="shrink-0 font-mono font-light text-xs text-black/50">
+            {new Date(story.updated_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+          </span>
+        )}
+      </div>
 
       <hr className="border-t-[0.5px] border-black/20 mb-3" />
 

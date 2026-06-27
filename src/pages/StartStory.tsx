@@ -5,6 +5,7 @@ import BackLink from '../components/ui/BackLink'
 import VibeSelector from '../components/ui/VibeSelector'
 import CatMascot from '../components/ui/cat/CatMascot'
 import { SittingCatDoodle } from '../components/animations/DoodleIcons'
+import InviteFriendsButton from '../components/ui/InviteFriendsButton'
 import { createStory } from '../lib/supabase'
 import type { Vibe } from '../types'
 
@@ -34,7 +35,7 @@ export default function StartStory() {
 
   if (storyId) {
     return (
-      <main className="max-w-2xl mx-auto px-6 py-16 min-h-[70vh] flex flex-col items-center justify-center text-center">
+      <main className="max-w-2xl mx-auto px-6 py-6 min-h-[70vh] flex flex-col items-center justify-center text-center">
         <style>{`
           @keyframes story-active-pop {
             0%   { transform: scale(0.85); opacity: 0; }
@@ -61,16 +62,18 @@ export default function StartStory() {
           <Link to={`/story/${storyId}`} className="btn-primary flex-1 text-[11px] tracking-wide uppercase py-4">
             View Progress
           </Link>
-          <Link to="/archive" className="btn-secondary flex-1 text-[11px] tracking-wide uppercase py-4">
-            Go to Archive
-          </Link>
+          <InviteFriendsButton
+            storyId={storyId}
+            storyTitle={title.trim() || 'Untitled Story'}
+            className="btn-secondary flex-1 text-[11px] tracking-wide uppercase py-4"
+          />
         </div>
       </main>
     )
   }
 
   return (
-    <main className="max-w-2xl mx-auto px-6 py-16">
+    <main className="max-w-2xl mx-auto px-6 pt-6 pb-16">
       <div className="fixed top-28 right-0 z-30 pointer-events-none">
         <CatMascot pose="peekingSide" blink tailTwitch style={{ transform: 'translateX(20px)' }} />
       </div>

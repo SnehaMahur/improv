@@ -1,8 +1,8 @@
 export type StoryStatus = 'active' | 'finished'
 
-export type Vibe = 'funny' | 'romance' | 'scary' | 'absurd' | 'emotional'
+export type Vibe = 'funny' | 'romance' | 'scary' | 'absurd' | 'emotional' | 'mystery'
 
-export const VIBES: Vibe[] = ['funny', 'romance', 'scary', 'absurd', 'emotional']
+export const VIBES: Vibe[] = ['funny', 'romance', 'scary', 'absurd', 'emotional', 'mystery']
 
 export type ReactionType = 'heart' | 'laugh' | 'happy' | 'sad' | 'angry'
 

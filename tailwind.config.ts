@@ -8,6 +8,7 @@ export default {
         sans: ['"Inter"', 'system-ui', 'sans-serif'],
         serif: ['"Playfair Display"', 'Georgia', 'serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
+        aileron: ['"Aileron"', '"Inter"', 'system-ui', 'sans-serif'],
       },
       animation: {
         'draw-in': 'draw-in 0.6s ease forwards',

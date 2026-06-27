@@ -10,7 +10,7 @@ export default function Home() {
 
       {/* Top: title + subtitle */}
       <div className="w-full max-w-sm">
-        <h1 className="font-serif font-medium text-3xl mb-2 tracking-tight text-black">Improv</h1>
+        <h1 className="font-aileron font-semibold uppercase text-3xl mb-2 tracking-tight text-black">Improv</h1>
         <p className="font-mono font-light text-sm text-black tracking-wide">
           Stories written by strangers
         </p>

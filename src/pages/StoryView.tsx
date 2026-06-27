@@ -25,6 +25,7 @@ export default function StoryView() {
   const [showCompletion, setShowCompletion] = useState(false)
   const [justCompleted, setJustCompleted] = useState(false)
   const [showTurnPassed, setShowTurnPassed] = useState(false)
+  const [showContributors, setShowContributors] = useState(false)
 
   useEffect(() => {
     if (!id) return
@@ -116,13 +117,13 @@ export default function StoryView() {
     )
   }
 
-  if (showTurnPassed) {
-    return <TurnAnimation message="Next turn is somebody else's." />
+  if (showTurnPassed && story) {
+    return <TurnAnimation message="Next turn is somebody else's." storyId={story.id} storyTitle={story.title} />
   }
 
   if (loading) {
     return (
-      <main className="max-w-2xl mx-auto px-6 py-16">
+      <main className="max-w-2xl mx-auto px-6 pt-6 pb-16">
         <div className="animate-pulse space-y-4">
           <div className="h-8 bg-gray-100 w-1/2" />
           <div className="h-4 bg-gray-100 w-full" />
@@ -134,7 +135,7 @@ export default function StoryView() {
 
   if (error && !story) {
     return (
-      <main className="max-w-2xl mx-auto px-6 py-16">
+      <main className="max-w-2xl mx-auto px-6 pt-6 pb-16">
         <p className="text-red-600">{error}</p>
       </main>
     )
@@ -148,7 +149,7 @@ export default function StoryView() {
 
   return (
     <>
-      <main className={`max-w-2xl mx-auto px-6 pt-12 ${isActive ? 'pb-28' : 'pb-16'}`}>
+      <main className={`max-w-2xl mx-auto px-6 pt-6 ${isActive ? 'pb-28' : 'pb-16'}`}>
         {!(isFinished && justCompleted) && <BackLink className="mb-6" />}
 
         {isFinished ? (
@@ -163,7 +164,7 @@ export default function StoryView() {
                 #{story.number}
               </span>
 
-              <div className="flex items-start justify-between gap-4 mb-4">
+              <div className="flex items-start justify-between gap-4 mb-1">
                 <h1 className="font-serif font-medium text-2xl">{story.title}</h1>
                 {story.vibes?.length > 0 && (
                   <div className="shrink-0">
@@ -172,12 +173,52 @@ export default function StoryView() {
                 )}
               </div>
 
+              <p className="font-mono font-light text-xs text-black/50 mb-4">
+                Finished on{' '}
+                {new Date(story.updated_at).toLocaleDateString('en-US', {
+                  month: 'long',
+                  day: 'numeric',
+                  year: 'numeric',
+                })}
+              </p>
+
               <hr className="border-t-[0.5px] border-black/20 mb-4" />
 
               <p className="text-base font-normal leading-relaxed">
                 {story.lines.map(l => l.content).join(' ')}
               </p>
             </div>
+
+            <button
+              type="button"
+              onClick={() => setShowContributors(s => !s)}
+              className="font-mono font-light text-xs text-black underline mt-4"
+            >
+              {showContributors ? 'Hide who wrote this' : 'See who wrote this & reactions'}
+            </button>
+
+            {showContributors && (
+              <div className="space-y-7 mt-6">
+                {story.lines.map((line, i) => (
+                  <div key={line.id} className="flex gap-4">
+                    <span className="font-mono font-light text-xs text-black pt-1 w-6 shrink-0 text-right">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <div className="flex-1">
+                      <p className="text-base font-normal leading-relaxed">{line.content}</p>
+                      <div className="flex items-center justify-between mt-1">
+                        <p className="text-xs font-mono font-light text-black/40">— {line.contributor_name}</p>
+                        <ReactionPicker
+                          id={line.id}
+                          reactions={line.reactions ?? {}}
+                          onReact={type => handleLineReaction(line.id, type)}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         ) : (
           <>

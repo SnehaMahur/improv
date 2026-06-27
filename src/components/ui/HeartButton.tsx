@@ -28,7 +28,7 @@ export default function HeartButton({ id, count, onReact, size = 18 }: Props) {
       type="button"
       onClick={handleClick}
       disabled={filled}
-      className={`inline-flex items-center gap-2 transition-colors duration-150 ${filled ? 'text-black' : 'text-black/40 hover:text-black/70'}`}
+      className={`inline-flex items-center gap-2 transition-opacity duration-150 text-black ${filled ? '' : 'hover:opacity-70'}`}
     >
       <svg width={size} height={size} viewBox="0 0 24 24" strokeWidth={filled ? 0 : 1.6} strokeLinejoin="round">
         <path d={HEART_PATH} fill={filled ? 'currentColor' : 'none'} stroke={filled ? 'none' : 'currentColor'} />
