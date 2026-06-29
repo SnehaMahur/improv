@@ -60,6 +60,10 @@ export default function Home() {
         Or go to <Link to="/archive" className="underline">archive</Link>.
       </p>
 
+      {/* Uncapped — soaks up all remaining space so the footer credit always
+          sits at the very bottom, without affecting the capped spacers above. */}
+      <div className="flex-1" />
+
       {/* Footer credit */}
       <p className="font-mono font-light text-xs text-black">
         Designed &amp; built by{' '}
