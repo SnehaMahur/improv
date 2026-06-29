@@ -9,7 +9,7 @@ export default function Home() {
     >
 
       {/* Top: title + subtitle */}
-      <div className="w-full max-w-sm">
+      <div className="w-full max-w-sm mb-2">
         <h1 className="font-aileron font-semibold uppercase text-3xl mb-2 tracking-tight text-black">Improv</h1>
         <p className="font-mono font-light text-sm text-black tracking-wide">
           Stories written by strangers
@@ -17,12 +17,12 @@ export default function Home() {
       </div>
 
       {/* Middle: animation */}
-      <div className="w-full max-w-sm my-4">
+      <div className="w-full max-w-sm my-6">
         <HeroAnimation />
       </div>
 
       {/* Tagline */}
-      <div className="max-w-xs mb-4">
+      <div className="max-w-xs mb-6">
         <p className="font-mono font-light text-sm leading-relaxed mb-2 text-black">
           Write a line. Pass it on.<br />
           See what the world creates together.
@@ -33,7 +33,7 @@ export default function Home() {
       </div>
 
       {/* CTAs */}
-      <div className="flex gap-2 w-full max-w-xs mb-2">
+      <div className="flex gap-2 w-full max-w-xs mb-4">
         <Link to="/start" className="btn-primary flex-1 !px-2 text-[10px] tracking-normal uppercase py-3 whitespace-nowrap">
           Start a Story
         </Link>
@@ -43,7 +43,7 @@ export default function Home() {
       </div>
 
       {/* Plain text link below CTAs */}
-      <p className="font-mono font-light text-xs text-black mb-3">
+      <p className="font-mono font-light text-xs text-black mb-5">
         Or go to <Link to="/archive" className="underline">archive</Link>.
       </p>
 
