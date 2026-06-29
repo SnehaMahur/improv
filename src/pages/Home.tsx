@@ -4,7 +4,7 @@ import HeroAnimation from '../components/animations/HeroAnimation'
 export default function Home() {
   return (
     <main
-      className="min-h-[100dvh] flex flex-col items-center justify-between px-6 pb-6 text-center"
+      className="min-h-full flex flex-col items-center justify-between px-6 pb-6 text-center"
       style={{ paddingTop: 'calc(env(safe-area-inset-top) + 1.5rem)' }}
     >
 
@@ -49,7 +49,16 @@ export default function Home() {
 
       {/* Footer credit */}
       <p className="font-mono font-light text-xs text-black">
-        Designed &amp; built by Sneha Mahur with Claude
+        Designed &amp; built by{' '}
+        <a
+          href="https://www.instagram.com/designiverse.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline"
+        >
+          @Designiverse
+        </a>{' '}
+        with Claude
       </p>
     </main>
   )
