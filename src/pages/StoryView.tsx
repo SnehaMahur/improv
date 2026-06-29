@@ -299,59 +299,75 @@ export default function StoryView() {
               ))}
             </div>
 
-            {/* Add comment */}
-            <div className="space-y-4">
-              <textarea
-                className="input-line"
-                rows={2}
-                placeholder="Leave a comment…"
-                value={commentText}
-                onChange={e => setCommentText(e.target.value)}
-              />
-              <input
-                type="text"
-                className="input-line"
-                placeholder="Your name…"
-                value={commentName}
-                onChange={e => setCommentName(e.target.value)}
-              />
-              <Button onClick={handleAddComment} disabled={!commentText.trim() || !commentName.trim()}>
-                Post Comment
-              </Button>
+            {/* Add comment — folder-styled, edge-to-edge like the line composer */}
+            <div className="-mx-6">
+              <div className="flex pl-4">
+                <div className="bg-white border-[0.5px] border-b-0 border-black/40 rounded-t-md px-4 py-1.5">
+                  <span className="font-mono text-xs uppercase tracking-wide text-black/70">Comment</span>
+                </div>
+              </div>
+              <div className="bg-white border-[0.5px] border-black/40 -mt-px p-4 pb-3 space-y-4">
+                <textarea
+                  className="input-line"
+                  rows={2}
+                  placeholder="Leave a comment…"
+                  value={commentText}
+                  onChange={e => setCommentText(e.target.value)}
+                />
+                <input
+                  type="text"
+                  className="input-line"
+                  placeholder="Your name…"
+                  value={commentName}
+                  onChange={e => setCommentName(e.target.value)}
+                />
+                <Button onClick={handleAddComment} disabled={!commentText.trim() || !commentName.trim()}>
+                  Post Comment
+                </Button>
+              </div>
             </div>
           </div>
         )}
       </main>
 
-      {/* Sticky composer — always reachable at the bottom of the screen */}
+      {/* Sticky composer — styled like a folder, tabbed with the upcoming line number */}
       {isActive && (
-        <div className="fixed bottom-0 inset-x-0 z-40 border-t-[0.5px] border-black/30" style={{ backgroundColor: '#f5ede8' }}>
-          <div className="max-w-2xl mx-auto relative px-6 py-3">
-            {error && <p className="text-xs text-red-600 mb-2">{error}</p>}
-            <textarea
-              className="input-line w-full resize-none mb-2"
-              rows={1}
-              placeholder="Continue the story…"
-              value={newLine}
-              onChange={e => setNewLine(e.target.value)}
-              disabled={submitting}
-            />
-            <div className="flex gap-2 items-stretch">
-              <input
-                type="text"
-                className="input-line flex-1"
-                placeholder="Name…"
-                value={name}
-                onChange={e => setName(e.target.value)}
+        <div className="fixed bottom-0 inset-x-0 z-40" style={{ backgroundColor: '#f5ede8' }}>
+          <div className="max-w-2xl mx-auto pt-3">
+            <div className="flex pl-4">
+              <div className="bg-white border-[0.5px] border-b-0 border-black/40 rounded-t-md px-4 py-1.5">
+                <span className="font-mono text-xs uppercase tracking-wide text-black/70">
+                  Line {Math.min(story.line_count + 1, MAX_LINES)}
+                </span>
+              </div>
+            </div>
+            <div className="bg-white border-[0.5px] border-black/40 -mt-px p-4 pb-3">
+              {error && <p className="text-xs text-red-600 mb-2">{error}</p>}
+              <textarea
+                className="input-line w-full resize-none mb-2"
+                rows={1}
+                placeholder="Continue the story…"
+                value={newLine}
+                onChange={e => setNewLine(e.target.value)}
                 disabled={submitting}
               />
-              <Button
-                onClick={handleAddLine}
-                disabled={!newLine.trim() || !name.trim() || submitting}
-                className="!px-4 !py-2 text-xs whitespace-nowrap"
-              >
-                {submitting ? '…' : story.line_count === MAX_LINES - 1 ? 'Finish' : 'Add'}
-              </Button>
+              <div className="flex gap-2 items-stretch">
+                <input
+                  type="text"
+                  className="input-line flex-1"
+                  placeholder="Name…"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  disabled={submitting}
+                />
+                <Button
+                  onClick={handleAddLine}
+                  disabled={!newLine.trim() || !name.trim() || submitting}
+                  className="!px-4 !py-2 text-xs whitespace-nowrap"
+                >
+                  {submitting ? '…' : story.line_count === MAX_LINES - 1 ? 'Finish' : 'Add'}
+                </Button>
+              </div>
             </div>
           </div>
         </div>

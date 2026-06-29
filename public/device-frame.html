@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #f5ede8;
+    overflow: hidden;
+  }
+  .phone {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 412px;
+    height: 890px;
+    background: #0b0b0b;
+    border-radius: 62px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35), inset 0 0 0 2px #2a2a2a;
+    padding: 14px;
+    box-sizing: border-box;
+  }
+  .screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 48px;
+    overflow: hidden;
+  }
+  .screen iframe {
+    width: 384px;
+    height: 822px;
+    border: none;
+    display: block;
+    margin-top: 40px;
+  }
+  .island {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110px;
+    height: 28px;
+    background: #0b0b0b;
+    border-radius: 16px;
+    z-index: 10;
+  }
+  .sidebtn {
+    position: absolute;
+    background: #0b0b0b;
+    border-radius: 3px;
+  }
+  .btn-power { right: -3px; top: 220px; width: 4px; height: 80px; }
+  .btn-vol-up { left: -3px; top: 180px; width: 4px; height: 50px; }
+  .btn-vol-down { left: -3px; top: 245px; width: 4px; height: 50px; }
+</style>
+</head>
+<body>
+  <div class="phone">
+    <div class="screen">
+      <iframe id="app-frame" src="about:blank"></iframe>
+      <div class="island"></div>
+    </div>
+    <div class="sidebtn btn-power"></div>
+    <div class="sidebtn btn-vol-up"></div>
+    <div class="sidebtn btn-vol-down"></div>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const path = params.get('path') || '/';
+    document.getElementById('app-frame').src = path;
+  </script>
+</body>
+</html>
