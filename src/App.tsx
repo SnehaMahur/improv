@@ -23,7 +23,11 @@ export default function App() {
           ways, height matched to the Continue-a-Story page's natural content height
           — instead of stretching full browser width/height. Taller pages scroll
           inside the box rather than growing it. */}
-      <div className="min-h-screen w-full flex md:items-center justify-center" style={{ backgroundColor: '#e9ddd2' }}>
+      {/* min-h-[100dvh], not min-h-screen: on mobile Chrome, 100vh includes the area
+          behind the collapsible address bar that isn't actually visible until the
+          user scrolls — sizing to it pushes content (like the homepage footer) below
+          the fold from the very first paint. dvh tracks the real visible viewport. */}
+      <div className="min-h-[100dvh] w-full flex md:items-center justify-center" style={{ backgroundColor: '#e9ddd2' }}>
         {/* The transform turns this box into the containing block for any descendant
             `position: fixed` elements (sticky composer, full-screen overlays), so they
             stay confined to the box instead of the real browser viewport. flex flex-col

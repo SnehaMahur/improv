@@ -56,13 +56,9 @@ export default function Home() {
       <Spacer maxH="max-h-8" />
 
       {/* Plain text link below CTAs */}
-      <p className="font-mono font-light text-xs text-black mb-3">
+      <p className="font-mono font-light text-xs text-black mb-2">
         Or go to <Link to="/archive" className="underline">archive</Link>.
       </p>
-
-      {/* Uncapped — soaks up all remaining space so the footer credit always
-          sits at the very bottom, without affecting the capped spacers above. */}
-      <div className="flex-1" />
 
       {/* Footer credit */}
       <p className="font-mono font-light text-xs text-black">
