@@ -109,7 +109,7 @@ export default function Archive() {
           )}
 
           {!loading && stories.length > 0 && (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-2 gap-5">
               {stories.map(story => (
                 <StoryCard key={story.id} story={story} linkTo={`/story/${story.id}`} />
               ))}

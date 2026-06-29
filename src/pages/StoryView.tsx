@@ -149,7 +149,7 @@ export default function StoryView() {
 
   return (
     <>
-      <main className={`max-w-2xl mx-auto px-6 pt-6 ${isActive ? 'pb-28' : 'pb-16'}`}>
+      <main className={`max-w-2xl mx-auto px-6 pt-6 ${isActive ? '' : 'pb-16'}`}>
         {!(isFinished && justCompleted) && <BackLink className="mb-6" />}
 
         {isFinished ? (
@@ -330,9 +330,13 @@ export default function StoryView() {
         )}
       </main>
 
-      {/* Sticky composer — styled like a folder, tabbed with the upcoming line number */}
+      {/* Sticky composer — styled like a folder, tabbed with the upcoming line number.
+          `sticky bottom-0` (not `fixed`) so it pins to the bottom of the box's own
+          scroll container instead of the real browser viewport, and stays put while
+          the lines above scroll past — `fixed` would scroll away with the content
+          here because the box itself is the scrolling element. */}
       {isActive && (
-        <div className="fixed bottom-0 inset-x-0 z-40" style={{ backgroundColor: '#f5ede8' }}>
+        <div className="sticky bottom-0 z-40" style={{ backgroundColor: '#f5ede8' }}>
           <div className="max-w-2xl mx-auto pt-3">
             <div className="flex pl-4">
               <div className="bg-white border-[0.5px] border-b-0 border-black/40 rounded-t-md px-4 py-1.5">

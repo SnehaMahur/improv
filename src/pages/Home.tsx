@@ -33,7 +33,7 @@ export default function Home() {
       </div>
 
       {/* CTAs */}
-      <div className="flex gap-2 w-full max-w-xs mb-1">
+      <div className="flex gap-2 w-full max-w-xs mb-2">
         <Link to="/start" className="btn-primary flex-1 !px-2 text-[10px] tracking-normal uppercase py-3 whitespace-nowrap">
           Start a Story
         </Link>
@@ -43,7 +43,7 @@ export default function Home() {
       </div>
 
       {/* Plain text link below CTAs */}
-      <p className="font-mono font-light text-xs text-black mb-1">
+      <p className="font-mono font-light text-xs text-black mb-3">
         Or go to <Link to="/archive" className="underline">archive</Link>.
       </p>
 
