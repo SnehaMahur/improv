@@ -19,13 +19,13 @@ function Shell({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <BrowserRouter>
-      {/* On larger screens, cap the app to a fixed 960×720 (min) rectangle, centered,
+      {/* On larger screens, cap the app to a fixed 800×600 (min) rectangle, centered,
           instead of stretching full browser width — keeps the phone-app feel on desktop. */}
       <div className="min-h-screen w-full flex justify-center" style={{ backgroundColor: '#e9ddd2' }}>
         {/* The transform turns this box into the containing block for any descendant
             `position: fixed` elements (sticky composer, full-screen overlays), so they
-            stay confined to the 960×720 box instead of the real browser viewport. */}
-        <div className="w-full max-w-[960px] min-h-[720px]" style={{ backgroundColor: '#f5ede8', transform: 'translateZ(0)' }}>
+            stay confined to the 800×600 box instead of the real browser viewport. */}
+        <div className="w-full max-w-[800px] min-h-[600px]" style={{ backgroundColor: '#f5ede8', transform: 'translateZ(0)' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/start" element={<Shell><StartStory /></Shell>} />
