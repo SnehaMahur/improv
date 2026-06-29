@@ -4,7 +4,7 @@ import HeroAnimation from '../components/animations/HeroAnimation'
 export default function Home() {
   return (
     <main
-      className="min-h-full flex flex-col items-center justify-between px-6 pb-6 text-center"
+      className="flex-1 flex flex-col items-center justify-between px-6 pb-6 text-center"
       style={{ paddingTop: 'calc(env(safe-area-inset-top) + 1.5rem)' }}
     >
 

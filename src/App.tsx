@@ -9,7 +9,7 @@ import NotFound from './pages/NotFound'
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-full flex flex-col">
+    <div className="flex-1 flex flex-col">
       <Header />
       <div className="flex-1">{children}</div>
     </div>
@@ -19,13 +19,15 @@ function Shell({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <BrowserRouter>
-      {/* On larger screens, cap the app to a fixed 800×600 (min) rectangle, centered,
-          instead of stretching full browser width — keeps the phone-app feel on desktop. */}
-      <div className="min-h-screen w-full flex justify-center" style={{ backgroundColor: '#e9ddd2' }}>
+      {/* On larger screens, cap the app to a fixed 800×550 (min) rectangle, centered
+          both ways on the page — instead of stretching full browser width/height. */}
+      <div className="min-h-screen w-full flex md:items-center justify-center" style={{ backgroundColor: '#e9ddd2' }}>
         {/* The transform turns this box into the containing block for any descendant
             `position: fixed` elements (sticky composer, full-screen overlays), so they
-            stay confined to the 800×600 box instead of the real browser viewport. */}
-        <div className="w-full max-w-[800px] min-h-[600px]" style={{ backgroundColor: '#f5ede8', transform: 'translateZ(0)' }}>
+            stay confined to the 800×550 box instead of the real browser viewport.
+            flex flex-col lets Home/Shell fill it via flex-1 instead of percentage
+            height chains (which need every ancestor to have a definite height). */}
+        <div className="w-full max-w-[800px] min-h-[550px] flex flex-col" style={{ backgroundColor: '#f5ede8', transform: 'translateZ(0)' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/start" element={<Shell><StartStory /></Shell>} />
