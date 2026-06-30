@@ -53,15 +53,17 @@ export default function Home() {
         </Link>
       </div>
 
-      <Spacer maxH="max-h-8" />
 
-      {/* Plain text link below CTAs */}
-      <p className="font-mono font-light text-xs text-black mb-2">
+      {/* Plain text link below CTAs — sits immediately below, no spacer */}
+      <p className="font-mono font-light text-xs text-black mt-4">
         Or go to <Link to="/archive" className="underline">archive</Link>.
       </p>
 
+      {/* Push footer to the bottom of the remaining space */}
+      <div className="flex-1" />
+
       {/* Footer credit */}
-      <p className="font-mono font-light text-xs text-black">
+      <p className="font-mono font-light text-xs text-black pb-2">
         Designed &amp; built by{' '}
         <a
           href="https://www.instagram.com/designiverse.app/"

@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 export default function Header() {
   const { pathname } = useLocation()
-  const onArchive = pathname.startsWith('/archive')
+  const onArchive = pathname.startsWith('/archive') || pathname.startsWith('/story/')
 
   return (
     <header
