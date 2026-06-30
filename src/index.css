@@ -34,7 +34,7 @@
   .btn-secondary {
     @apply inline-flex items-center justify-center px-6 py-3 border border-black
            font-medium text-sm tracking-wide bg-transparent text-black
-           hover:bg-black hover:text-white transition-colors duration-150;
+           md:hover:bg-black/5 transition-colors duration-150;
   }
 
   .card {

@@ -9,9 +9,9 @@ import NotFound from './pages/NotFound'
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex-1 flex flex-col">
+    <div className="flex-1 min-h-0 flex flex-col">
       <Header />
-      <div className="flex-1">{children}</div>
+      <div className="flex-1 min-h-0 flex flex-col">{children}</div>
     </div>
   )
 }
@@ -27,14 +27,9 @@ export default function App() {
           behind the collapsible address bar that isn't actually visible until the
           user scrolls — sizing to it pushes content (like the homepage footer) below
           the fold from the very first paint. dvh tracks the real visible viewport. */}
-      <div className="min-h-[100dvh] w-full flex md:items-center justify-center" style={{ backgroundColor: '#e9ddd2' }}>
-        {/* The transform turns this box into the containing block for any descendant
-            `position: fixed` elements (sticky composer, full-screen overlays), so they
-            stay confined to the box instead of the real browser viewport. flex flex-col
-            lets Home/Shell fill it via flex-1 instead of percentage height chains
-            (which need every ancestor to have a definite height). */}
+      <div className="h-[100dvh] w-full flex md:items-center justify-center" style={{ backgroundColor: '#e9ddd2' }}>
         <div
-          className="w-full max-w-[900px] md:h-[763px] flex flex-col md:overflow-y-auto"
+          className="w-full h-full max-w-[900px] md:h-[763px] flex flex-col overflow-hidden"
           style={{ backgroundColor: '#f5ede8', transform: 'translateZ(0)' }}
         >
           <Routes>

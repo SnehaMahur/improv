@@ -123,7 +123,7 @@ export default function StoryView() {
 
   if (loading) {
     return (
-      <main className="max-w-2xl mx-auto px-6 pt-6 pb-16">
+      <main className="flex-1 overflow-y-auto max-w-2xl mx-auto w-full px-6 pt-6 pb-16">
         <div className="animate-pulse space-y-4">
           <div className="h-8 bg-gray-100 w-1/2" />
           <div className="h-4 bg-gray-100 w-full" />
@@ -135,7 +135,7 @@ export default function StoryView() {
 
   if (error && !story) {
     return (
-      <main className="max-w-2xl mx-auto px-6 pt-6 pb-16">
+      <main className="flex-1 overflow-y-auto max-w-2xl mx-auto w-full px-6 pt-6 pb-16">
         <p className="text-red-600">{error}</p>
       </main>
     )
@@ -148,8 +148,8 @@ export default function StoryView() {
   const progress = Math.round((story.line_count / MAX_LINES) * 100)
 
   return (
-    <>
-      <main className={`max-w-2xl mx-auto px-6 pt-6 ${isActive ? '' : 'pb-16'}`}>
+    <div className={isActive ? 'flex-1 flex flex-col min-h-0' : ''}>
+      <main className={`max-w-2xl mx-auto w-full px-6 pt-6 flex-1 overflow-y-auto ${isActive ? '' : 'pb-16'}`}>
         {!(isFinished && justCompleted) && <BackLink className="mb-6" />}
 
         {isFinished ? (
@@ -330,13 +330,8 @@ export default function StoryView() {
         )}
       </main>
 
-      {/* Sticky composer — styled like a folder, tabbed with the upcoming line number.
-          `sticky bottom-0` (not `fixed`) so it pins to the bottom of the box's own
-          scroll container instead of the real browser viewport, and stays put while
-          the lines above scroll past — `fixed` would scroll away with the content
-          here because the box itself is the scrolling element. */}
       {isActive && (
-        <div className="sticky bottom-0 z-40" style={{ backgroundColor: '#f5ede8' }}>
+        <div style={{ backgroundColor: '#f5ede8' }}>
           <div className="max-w-2xl mx-auto pt-3">
             <div className="flex pl-4">
               <div className="bg-white border-[0.5px] border-b-0 border-black/40 rounded-t-md px-4 py-1.5">
@@ -376,6 +371,6 @@ export default function StoryView() {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }

@@ -18,7 +18,7 @@ export default function ContinueStory() {
   }, [])
 
   return (
-    <main className="max-w-5xl mx-auto px-6 pt-6 pb-16">
+    <main className="flex-1 overflow-y-auto max-w-5xl mx-auto w-full px-6 pt-6 pb-16">
       <BackLink className="mb-6" />
       <p className="label-sm mb-3">Active</p>
       <div className="flex items-end justify-between mb-12">

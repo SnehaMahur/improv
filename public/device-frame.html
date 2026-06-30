@@ -3,71 +3,92 @@
 <head>
 <meta charset="UTF-8" />
 <style>
+  *, *::before, *::after { box-sizing: border-box; }
   html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    background: #f5ede8;
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
   }
   .phone {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 412px;
-    height: 890px;
+    width: 393px;
+    height: 852px;
     background: #0b0b0b;
-    border-radius: 62px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.35), inset 0 0 0 2px #2a2a2a;
+    border-radius: 55px;
+    box-shadow:
+      0 40px 80px rgba(0,0,0,0.6),
+      0 0 0 1.5px #3a3a3a,
+      inset 0 0 0 1px #2a2a2a;
     padding: 14px;
-    box-sizing: border-box;
+    flex-shrink: 0;
+    position: relative;
   }
   .screen {
-    position: relative;
     width: 100%;
     height: 100%;
     background: #fff;
-    border-radius: 48px;
+    border-radius: 42px;
     overflow: hidden;
-  }
-  .screen iframe {
-    width: 384px;
-    height: 822px;
-    border: none;
-    display: block;
-    margin-top: 40px;
+    position: relative;
   }
   .island {
     position: absolute;
-    top: 14px;
+    top: 13px;
     left: 50%;
     transform: translateX(-50%);
-    width: 110px;
-    height: 28px;
+    width: 120px;
+    height: 34px;
     background: #0b0b0b;
-    border-radius: 16px;
+    border-radius: 20px;
     z-index: 10;
   }
-  .sidebtn {
-    position: absolute;
-    background: #0b0b0b;
-    border-radius: 3px;
+  .screen iframe {
+    width: 100%;
+    height: calc(100% - 44px);
+    border: none;
+    display: block;
+    margin-top: 44px;
   }
-  .btn-power { right: -3px; top: 220px; width: 4px; height: 80px; }
-  .btn-vol-up { left: -3px; top: 180px; width: 4px; height: 50px; }
-  .btn-vol-down { left: -3px; top: 245px; width: 4px; height: 50px; }
+  .progress-bar-track {
+    position: absolute;
+    top: 44px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(0,0,0,0.08);
+    z-index: 20;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: #000;
+    animation: demo-progress 60s linear forwards;
+  }
+  @keyframes demo-progress {
+    from { width: 0%; }
+    to   { width: 100%; }
+  }
+  .sidebtn { position: absolute; background: #2a2a2a; border-radius: 3px; }
+  .btn-power   { right: -3px; top: 200px; width: 4px; height: 80px; }
+  .btn-vol-up  { left: -3px;  top: 160px; width: 4px; height: 50px; }
+  .btn-vol-dn  { left: -3px;  top: 225px; width: 4px; height: 50px; }
+  .btn-silent  { left: -3px;  top: 110px; width: 4px; height: 32px; }
 </style>
 </head>
 <body>
   <div class="phone">
     <div class="screen">
-      <iframe id="app-frame" src="about:blank"></iframe>
       <div class="island"></div>
+      <div class="progress-bar-track"><div class="progress-bar-fill"></div></div>
+      <iframe id="app-frame" src="about:blank"></iframe>
     </div>
     <div class="sidebtn btn-power"></div>
     <div class="sidebtn btn-vol-up"></div>
-    <div class="sidebtn btn-vol-down"></div>
+    <div class="sidebtn btn-vol-dn"></div>
+    <div class="sidebtn btn-silent"></div>
   </div>
   <script>
     const params = new URLSearchParams(window.location.search);

@@ -35,7 +35,7 @@ export default function StartStory() {
 
   if (storyId) {
     return (
-      <main className="max-w-2xl mx-auto px-6 py-6 min-h-[70vh] flex flex-col items-center justify-center text-center">
+      <main className="flex-1 overflow-y-auto max-w-2xl mx-auto w-full px-6 py-6 flex flex-col items-center justify-center text-center">
         <style>{`
           @keyframes story-active-pop {
             0%   { transform: scale(0.85); opacity: 0; }
@@ -73,7 +73,7 @@ export default function StartStory() {
   }
 
   return (
-    <main className="max-w-2xl mx-auto px-6 pt-6 pb-16">
+    <main className="flex-1 overflow-y-auto max-w-2xl mx-auto w-full px-6 pt-6 pb-16">
       <div className="fixed top-28 right-0 z-30 pointer-events-none">
         <CatMascot pose="peekingSide" blink tailTwitch style={{ transform: 'translateX(20px)' }} />
       </div>
