@@ -12,7 +12,7 @@ export default function StoryCard({ story, linkTo }: Props) {
   const isFinished = story.status === 'finished'
 
   const card = (
-    <div className="border-[0.5px] border-black/40 bg-white p-5 hover:bg-black/5 transition-colors duration-150 cursor-pointer group">
+    <div className="h-full border-[0.5px] border-black/40 bg-white p-5 hover:bg-black/5 transition-colors duration-150 cursor-pointer group">
       {story.vibes?.length > 0 && (
         <div className="flex flex-wrap gap-1.5 mb-3">
           {story.vibes.map(v => (
@@ -66,7 +66,7 @@ export default function StoryCard({ story, linkTo }: Props) {
   )
 
   if (linkTo) {
-    return <Link to={linkTo}>{card}</Link>
+    return <Link to={linkTo} className="block h-full">{card}</Link>
   }
   return card
 }

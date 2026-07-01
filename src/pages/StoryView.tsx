@@ -154,7 +154,7 @@ export default function StoryView() {
 
         {isFinished ? (
           /* Finished stories: card with vibe, number, title, body — and a cat peeking on top */
-          <div className="relative mb-4">
+          <div className="relative mb-4 mt-14">
             <div className="absolute z-10 pointer-events-none" style={{ top: -52, right: 28 }}>
               <CatMascot pose="peeking" blink tailTwitch />
             </div>
