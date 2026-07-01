@@ -16,6 +16,7 @@
   .phone {
     width: 393px;
     height: 852px;
+    transform-origin: center center;
     background: #0b0b0b;
     border-radius: 55px;
     box-shadow:
@@ -34,6 +35,8 @@
     overflow: hidden;
     position: relative;
   }
+
+  /* Dynamic island */
   .island {
     position: absolute;
     top: 13px;
@@ -43,46 +46,107 @@
     height: 34px;
     background: #0b0b0b;
     border-radius: 20px;
-    z-index: 10;
+    z-index: 30;
   }
+
+  /* iOS status bar overlaid in the 54px strip above the iframe */
+  .status-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 54px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 22px 10px;
+    z-index: 20;
+    pointer-events: none;
+  }
+  .status-time {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #000;
+    letter-spacing: -0.3px;
+    line-height: 1;
+  }
+  .status-icons {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  /* Iframe sits below status bar */
   .screen iframe {
+    position: absolute;
+    top: 54px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
-    height: calc(100% - 44px);
+    height: calc(100% - 54px);
     border: none;
     display: block;
-    margin-top: 44px;
   }
+
+  /* Progress bar track just below status bar */
   .progress-bar-track {
     position: absolute;
-    top: 44px;
+    top: 54px;
     left: 0;
     right: 0;
     height: 2px;
     background: rgba(0,0,0,0.08);
-    z-index: 20;
+    z-index: 25;
   }
   .progress-bar-fill {
     height: 100%;
     width: 0%;
     background: #000;
-    animation: demo-progress 60s linear forwards;
   }
-  @keyframes demo-progress {
-    from { width: 0%; }
-    to   { width: 100%; }
-  }
+
   .sidebtn { position: absolute; background: #2a2a2a; border-radius: 3px; }
-  .btn-power   { right: -3px; top: 200px; width: 4px; height: 80px; }
-  .btn-vol-up  { left: -3px;  top: 160px; width: 4px; height: 50px; }
-  .btn-vol-dn  { left: -3px;  top: 225px; width: 4px; height: 50px; }
-  .btn-silent  { left: -3px;  top: 110px; width: 4px; height: 32px; }
+  .btn-power  { right: -3px; top: 200px; width: 4px; height: 80px; }
+  .btn-vol-up { left: -3px;  top: 160px; width: 4px; height: 50px; }
+  .btn-vol-dn { left: -3px;  top: 225px; width: 4px; height: 50px; }
+  .btn-silent { left: -3px;  top: 110px; width: 4px; height: 32px; }
 </style>
 </head>
 <body>
   <div class="phone">
     <div class="screen">
       <div class="island"></div>
-      <div class="progress-bar-track"><div class="progress-bar-fill"></div></div>
+
+      <div class="status-bar">
+        <span class="status-time" id="status-time">9:41</span>
+        <div class="status-icons">
+          <!-- Signal bars -->
+          <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+            <rect x="0"    y="8"   width="3" height="4"   rx="0.8" fill="#000"/>
+            <rect x="4.5"  y="5.5" width="3" height="6.5" rx="0.8" fill="#000"/>
+            <rect x="9"    y="3"   width="3" height="9"   rx="0.8" fill="#000"/>
+            <rect x="13.5" y="0"   width="3" height="12"  rx="0.8" fill="#000"/>
+          </svg>
+          <!-- WiFi -->
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+            <circle cx="8" cy="11" r="1.5" fill="#000"/>
+            <path d="M4.5 7.5a5 5 0 0 1 7 0" stroke="#000" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M1.5 4.5a9 9 0 0 1 13 0" stroke="#000" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+          <!-- Battery -->
+          <svg width="27" height="13" viewBox="0 0 27 13" fill="none">
+            <rect x="0.5" y="0.5" width="23" height="12" rx="3.5" stroke="#000" stroke-opacity="0.35"/>
+            <rect x="2" y="2" width="19" height="9" rx="2" fill="#000"/>
+            <path d="M25 4.5v4a2 2 0 0 0 0-4z" fill="#000" fill-opacity="0.4"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+
       <iframe id="app-frame" src="about:blank"></iframe>
     </div>
     <div class="sidebtn btn-power"></div>
@@ -90,10 +154,220 @@
     <div class="sidebtn btn-vol-dn"></div>
     <div class="sidebtn btn-silent"></div>
   </div>
+
   <script>
+    // Scale phone to fit viewport with padding
+    function scalePhone() {
+      const phone = document.querySelector('.phone');
+      const pad = 24;
+      const scaleX = (window.innerWidth  - pad) / 393;
+      const scaleY = (window.innerHeight - pad) / 852;
+      phone.style.transform = 'scale(' + Math.min(scaleX, scaleY) + ')';
+    }
+    scalePhone();
+    window.addEventListener('resize', scalePhone);
+
+    const iframe = document.getElementById('app-frame');
     const params = new URLSearchParams(window.location.search);
     const path = params.get('path') || '/';
-    document.getElementById('app-frame').src = path;
+
+    // Show current time in status bar
+    const now = new Date();
+    document.getElementById('status-time').textContent =
+      now.getHours() + ':' + String(now.getMinutes()).padStart(2, '0');
+
+    if (params.get('demo') === '1') {
+      runDemo();
+    } else {
+      iframe.src = path;
+    }
+
+    // ── Helpers ─────────────────────────────────────────────────────────────
+
+    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    function reactSet(el, value) {
+      const proto = el.tagName === 'TEXTAREA'
+        ? HTMLTextAreaElement.prototype
+        : HTMLInputElement.prototype;
+      const setter = Object.getOwnPropertyDescriptor(proto, 'value').set;
+      setter.call(el, value);
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+
+    async function typeInto(el, text, speed) {
+      if (!el) return;
+      speed = speed || 38;
+      el.focus();
+      for (let i = 1; i <= text.length; i++) {
+        reactSet(el, text.slice(0, i));
+        await sleep(speed + (Math.random() * 16 | 0));
+      }
+    }
+
+    function iDoc() { return iframe.contentDocument; }
+    function iWin() { return iframe.contentWindow; }
+
+    async function waitFor(sel, timeout) {
+      timeout = timeout || 8000;
+      const t0 = Date.now();
+      while (Date.now() - t0 < timeout) {
+        if (iDoc()) {
+          const el = iDoc().querySelector(sel);
+          if (el) return el;
+        }
+        await sleep(100);
+      }
+      return null;
+    }
+
+    async function waitForText(sel, text, timeout) {
+      timeout = timeout || 8000;
+      const t0 = Date.now();
+      while (Date.now() - t0 < timeout) {
+        if (iDoc()) {
+          const els = Array.from(iDoc().querySelectorAll(sel));
+          const el = els.find(e => e.textContent.trim().toLowerCase().includes(text.toLowerCase()));
+          if (el) return el;
+        }
+        await sleep(100);
+      }
+      return null;
+    }
+
+    async function clickEl(el) {
+      if (!el) return;
+      el.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+      el.dispatchEvent(new MouseEvent('mouseup',   { bubbles: true }));
+      el.click();
+      await sleep(400);
+    }
+
+    function startProgress(durationMs) {
+      const fill = document.getElementById('progress-fill');
+      const t0 = Date.now();
+      function tick() {
+        const pct = Math.min(100, (Date.now() - t0) / durationMs * 100);
+        fill.style.width = pct + '%';
+        if (pct < 100) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    async function navTo(path) {
+      iWin().history.pushState({}, '', path);
+      iWin().dispatchEvent(new PopStateEvent('popstate'));
+      await sleep(800);
+    }
+
+    // ── Demo script ──────────────────────────────────────────────────────────
+
+    async function runDemo() {
+      iframe.src = '/';
+      await sleep(2800);
+
+      startProgress(55000);
+
+      // ── Home ────────────────────────────────────────────────────────────
+      await sleep(1500);
+
+      // ── Start a Story ────────────────────────────────────────────────────
+      const startLink = await waitFor('a[href="/start"]');
+      await clickEl(startLink);
+      await sleep(700);
+
+      // Title — first input, placeholder "Give it a name…"
+      const titleEl = await waitFor('input[placeholder*="name" i]');
+      await typeInto(titleEl, "The world's worst pet", 38);
+      await sleep(350);
+
+      // First sentence
+      const sentenceEl = await waitFor('textarea');
+      await typeInto(sentenceEl, "I accidentally adopted a dragon that was terrified of fire.", 28);
+      await sleep(400);
+
+      // Vibe: Funny
+      const funnyBtn = await waitForText('button', 'funny');
+      await clickEl(funnyBtn);
+      await sleep(350);
+
+      // Name — second input, placeholder "Anonymous is fine too…"
+      const nameEl = await waitFor('input[placeholder*="anonymous" i]');
+      await typeInto(nameEl, 'xoxo', 55);
+      await sleep(400);
+
+      // Start Story button
+      const submitBtn = await waitForText('button', 'start story');
+      await clickEl(submitBtn);
+      await sleep(3000);
+
+      // ── Continue a Story → The Reply All ────────────────────────────────
+      await navTo('/continue');
+      await sleep(900);
+
+      const replyAllLink = await waitForText('a[href*="/story/"]', 'reply all');
+      await clickEl(replyAllLink);
+      await sleep(1200);
+
+      // Type line 10
+      const lineInput = await waitFor('textarea[placeholder*="Continue"]');
+      await typeInto(lineInput, 'We now have mandatory email etiquette training.', 28);
+      await sleep(350);
+
+      const lineInputs = Array.from(iDoc().querySelectorAll('input'));
+      const lineNameEl = lineInputs.find(i => (i.placeholder || '').includes('Name'));
+      await typeInto(lineNameEl, 'xoxo', 55);
+      await sleep(350);
+
+      const finishBtn = await waitForText('button', 'finish');
+      await clickEl(finishBtn);
+      await sleep(4000); // high-five animation plays
+
+      // Go to Archive button shown after completion
+      const archiveBtn = await waitForText('a', 'go to archive');
+      if (archiveBtn) {
+        await clickEl(archiveBtn);
+      } else {
+        await navTo('/archive');
+      }
+      await sleep(1200);
+
+      // ── Archive → open a finished story & react ─────────────────────────
+      const firstStoryLink = await waitFor('a[href*="/story/"]');
+      await clickEl(firstStoryLink);
+      await sleep(1200);
+
+      // Scroll down to see the story card
+      const main = iDoc().querySelector('main');
+      if (main) main.scrollBy({ top: 100, behavior: 'smooth' });
+      await sleep(600);
+
+      // Heart the story
+      const heartBtn = iDoc() && Array.from(iDoc().querySelectorAll('button')).find(
+        b => b.getAttribute('aria-label') && b.getAttribute('aria-label').toLowerCase().includes('heart')
+      );
+      await clickEl(heartBtn);
+      await sleep(500);
+
+      // Show contributors / reactions
+      const showBtn = await waitForText('button', 'see who wrote');
+      await clickEl(showBtn);
+      await sleep(700);
+
+      // React to a line
+      const reactBtn = iDoc() && Array.from(iDoc().querySelectorAll('button')).find(
+        b => b.getAttribute('aria-label') && b.getAttribute('aria-label').toLowerCase().includes('react')
+      );
+      await clickEl(reactBtn);
+      await sleep(600);
+
+      // Pick a reaction from the picker
+      const allBtns = Array.from(iDoc().querySelectorAll('button'));
+      const emojiBtn = allBtns.find(b => /[😂❤️🔥👏😭]/.test(b.textContent));
+      await clickEl(emojiBtn);
+
+      await sleep(2000);
+    }
   </script>
 </body>
 </html>
