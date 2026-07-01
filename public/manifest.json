@@ -1,0 +1,16 @@
+{
+  "name": "Improv",
+  "short_name": "Improv",
+  "description": "Write a line. Pass it on. See what the world creates together.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5ede8",
+  "theme_color": "#f5ede8",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

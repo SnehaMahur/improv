@@ -148,7 +148,7 @@ export default function StoryView() {
   const progress = Math.round((story.line_count / MAX_LINES) * 100)
 
   return (
-    <div className={isActive ? 'flex-1 flex flex-col min-h-0' : ''}>
+    <div className="flex-1 flex flex-col min-h-0">
       <main className={`max-w-2xl mx-auto w-full px-6 pt-6 flex-1 overflow-y-auto ${isActive ? '' : 'pb-16'}`}>
         {!(isFinished && justCompleted) && <BackLink className="mb-6" />}
 

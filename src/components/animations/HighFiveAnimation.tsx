@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 
 const LOADING_MS = 900
 const REVEAL_MS = 7000
@@ -347,14 +346,6 @@ m75 -30 c24 -22 23 -41 -4 -63 -20 -16 -25 -16 -45 -3 -27 18 -29 40 -6 65 20
           </svg>
 
           <TypewriterLine />
-
-          <Link
-            to="/continue"
-            className="btn-primary mt-8 text-[11px] tracking-wide uppercase py-3 px-8"
-            style={{ animation: 'fade-in 0.5s ease 3.4s forwards', opacity: 0 }}
-          >
-            Continue a Story
-          </Link>
         </>
       )}
     </main>
