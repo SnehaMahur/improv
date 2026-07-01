@@ -12,6 +12,17 @@
   }
   *::-webkit-scrollbar { display: none; }
 
+  @media (min-width: 768px) {
+    * {
+      scrollbar-width: thin;
+      -ms-overflow-style: auto;
+    }
+    *::-webkit-scrollbar { display: block; width: 6px; }
+    *::-webkit-scrollbar-track { background: transparent; }
+    *::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 3px; }
+    *::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.32); }
+  }
+
   html {
     scroll-behavior: smooth;
   }
