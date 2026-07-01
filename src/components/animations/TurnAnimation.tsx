@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { RunningCatDoodle } from './DoodleIcons'
 import InviteFriendsButton from '../ui/InviteFriendsButton'
 
@@ -6,12 +5,13 @@ interface Props {
   message: string
   storyId: string
   storyTitle: string
+  onViewProgress: () => void
 }
 
 /** Confirmation shown after passing a turn — stays up until the user picks where
     to go next, rather than auto-dismissing back into the story. Rendered as normal
     page content (not a fixed full-viewport overlay) so the header stays visible. */
-export default function TurnAnimation({ message, storyId, storyTitle }: Props) {
+export default function TurnAnimation({ message, storyId, storyTitle, onViewProgress }: Props) {
   return (
     <main className="min-h-[80vh] flex flex-col items-center justify-center px-10 text-center" style={{ backgroundColor: '#f5ede8' }}>
       <style>{`
@@ -44,9 +44,9 @@ export default function TurnAnimation({ message, storyId, storyTitle }: Props) {
       </p>
 
       <div className="flex gap-2 w-full max-w-xs" style={{ animation: 'turn-line-in 0.5s ease-out 2.4s forwards', opacity: 0 }}>
-        <Link to={`/story/${storyId}`} className="btn-primary flex-1 !px-2 text-[10px] tracking-normal uppercase py-3 whitespace-nowrap">
+        <button onClick={onViewProgress} className="btn-primary flex-1 !px-2 text-[10px] tracking-normal uppercase py-3 whitespace-nowrap">
           View Progress
-        </Link>
+        </button>
         <InviteFriendsButton
           storyId={storyId}
           storyTitle={storyTitle}

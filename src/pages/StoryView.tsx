@@ -118,7 +118,7 @@ export default function StoryView() {
   }
 
   if (showTurnPassed && story) {
-    return <TurnAnimation message="Next turn is somebody else's." storyId={story.id} storyTitle={story.title} />
+    return <TurnAnimation message="Next turn is somebody else's." storyId={story.id} storyTitle={story.title} onViewProgress={() => setShowTurnPassed(false)} />
   }
 
   if (loading) {
