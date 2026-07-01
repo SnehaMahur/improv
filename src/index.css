@@ -7,7 +7,10 @@
 @layer base {
   * {
     box-sizing: border-box;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
+  *::-webkit-scrollbar { display: none; }
 
   html {
     scroll-behavior: smooth;
@@ -28,7 +31,7 @@
   .btn-primary {
     @apply inline-flex items-center justify-center px-6 py-3 border border-black
            font-medium text-sm tracking-wide bg-black text-white
-           hover:bg-white hover:text-black transition-colors duration-150;
+           md:hover:bg-white md:hover:text-black transition-colors duration-150;
   }
 
   .btn-secondary {
@@ -63,6 +66,11 @@
   .nav-link-active {
     @apply text-sm font-medium tracking-wide border-b border-black pb-0.5;
   }
+}
+
+@keyframes tap-ripple {
+  0%   { transform: scale(0); opacity: 0.5; }
+  100% { transform: scale(2.6); opacity: 0; }
 }
 
 /* Doodle SVG stroke animations */
